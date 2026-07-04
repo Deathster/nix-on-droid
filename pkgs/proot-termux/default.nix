@@ -34,8 +34,14 @@ stdenv.mkDerivation {
       '#define HAS_LOADER_32BIT true' \
       ""
     ! (grep -F '#define HAS_LOADER_32BIT' src/arch.h)
-    # don't wanna get a 128GB loader (LLVM 17->21 regression?)
-    substituteInPlace src/GNUmakefile --replace ",-Ttext" ",-n,-Ttext"
+    # Two lld regressions to dodge here (LLVM 17->21):
+    #  - plain -Ttext yields a 128GB sparse loader file;
+    #  - the former workaround, -n (nmagic), emits p_align=4 with p_offset
+    #    not congruent to p_vaddr modulo the page size, so the kernel
+    #    rejects execve() of the loader with EINVAL (tracee then dies
+    #    with SIGSEGV; seen on Android 16, kernel 6.1).
+    # Keep page alignment explicit instead:
+    substituteInPlace src/GNUmakefile --replace ",-Ttext" ",-z,max-page-size=4096,-Ttext"
   '';
   buildInputs = [ talloc ];
   patches = [ ./detranslate-empty.patch ];
