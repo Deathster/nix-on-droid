@@ -20,7 +20,7 @@
       inputs.nmd.follows = "nmd";
     };
 
-    nixpkgs-docs.url = "github:NixOS/nixpkgs/release-25.05";
+    nixpkgs-docs.url = "github:NixOS/nixpkgs/release-26.05";
 
     nmd = {
       url = "sourcehut:~rycee/nmd";
