@@ -12,6 +12,14 @@
 >   current proot-termux/talloc, bootstrap built against nixpkgs 25.11
 >   (note: in flake setups the *system* nixpkgs version is chosen by
 >   *your* config flake, not by this pin);
+> - **fixed the proot loader ELF** that made upstream's `prerelease-25.11`
+>   unusable on real devices: the `-n` (nmagic) workaround for the LLVM 21
+>   128GB-sparse-loader regression emitted a LOAD segment with `p_align=4`
+>   and file offset not congruent to vaddr modulo the page size, so the
+>   kernel rejected `execve()` of the loader with `EINVAL` and every
+>   session died with `vpid 1: terminated with signal 11`; the loader is
+>   now linked with `-z max-page-size=4096` instead (verified on
+>   Honor MagicPad 2, Android 16);
 > - dev shell for hacking on this repo (`direnv` + `use flake`);
 > - known issue: the options manual does not currently build — the legacy
 >   `nmd` docs toolchain is incompatible with current home-manager;
