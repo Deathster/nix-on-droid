@@ -1,5 +1,22 @@
 # Nix-on-Droid
 
+> **This is a maintained fork** of
+> [nix-community/nix-on-droid](https://github.com/nix-community/nix-on-droid),
+> which has stalled (inputs frozen in early 2024, last release 24.05).
+> This fork picks up upstream's unreleased `prerelease-25.11` work and
+> continues from there:
+>
+> - `nixpkgs` and `home-manager` inputs updated to current (July 2026),
+>   with compatibility fixes for today's nixpkgs (`lib.mdDoc` removal);
+> - bootstrap toolchain from upstream's 25.11 prerelease: nix 2.31.2,
+>   current proot-termux/talloc, bootstrap built against nixpkgs 25.11
+>   (note: in flake setups the *system* nixpkgs version is chosen by
+>   *your* config flake, not by this pin);
+> - dev shell for hacking on this repo (`direnv` + `use flake`);
+> - known issue: the options manual does not currently build — the legacy
+>   `nmd` docs toolchain is incompatible with current home-manager;
+>   docs pipeline modernization is planned.
+
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/com.termux.nix)
