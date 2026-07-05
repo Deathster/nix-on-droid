@@ -21,6 +21,10 @@
 >   now linked with `-z max-page-size=4096` instead (verified on
 >   Honor MagicPad 2, Android 16);
 > - dev shell for hacking on this repo (`direnv` + `use flake`);
+> - a companion **app fork**
+>   [Deathster/nix-on-droid-app](https://github.com/Deathster/nix-on-droid-app)
+>   with the language-switch key fixed for external/physical keyboards
+>   (APK in its releases; the F-Droid build lacks this fix);
 > - known issue: the options manual does not currently build — the legacy
 >   `nmd` docs toolchain is incompatible with current home-manager;
 >   docs pipeline modernization is planned.
